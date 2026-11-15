@@ -1,5 +1,3 @@
-import "server-only";
-
 import { supabase } from "./supabase";
 
 type User = {
@@ -7,6 +5,7 @@ type User = {
   username: string;
 };
 
+// Omit creates a User object, but without the specified values (id here, as supabase automatically generates the id)
 type NewUser = Omit<User, "id">;
 
 // Example service: add more user operations here as the application grows.
@@ -17,9 +16,7 @@ export const usersService = {
       .select("id, username")
       .order("username", { ascending: true });
 
-    if (error) throw error;
-
-    return data as User[];
+    return { data: data as User[] | null, error };
   },
 
   async getUserById(id: string) {
@@ -29,9 +26,7 @@ export const usersService = {
       .eq("id", id)
       .single();
 
-    if (error) throw error;
-
-    return data as User;
+    return { data: data as User | null, error };
   },
 
   async addUser(user: NewUser) {
@@ -41,14 +36,12 @@ export const usersService = {
       .select("id, username")
       .single();
 
-    if (error) throw error;
-
-    return data as User;
+    return { data: data as User | null, error };
   },
 
   async deleteUser(id: string) {
     const { error } = await supabase.from("users").delete().eq("id", id);
 
-    if (error) throw error;
+    return { data: null, error };
   },
 };

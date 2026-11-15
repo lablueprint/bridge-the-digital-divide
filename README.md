@@ -25,11 +25,11 @@ npx supabase start
 npx supabase status
 ```
 
-Create `.env.local` with the local API URL and secret from `supabase status`:
+Create `.env.local` with the local API URL and publishable key from `supabase status`:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
-SUPABASE_SECRET_KEY=YOUR_LOCAL_SECRET_KEY
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_LOCAL_PUBLISHABLE_KEY
 ```
 
 ### Start the app

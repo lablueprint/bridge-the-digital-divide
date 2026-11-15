@@ -18,3 +18,10 @@ insert into users
 values
   ('kianbaghai'),
   ('gokulnamibiar');
+
+-- Example policy: allow browser clients to read users through the publishable key.
+create policy "Allow public users reads"
+on public.users
+for select
+to anon, authenticated
+using (true);

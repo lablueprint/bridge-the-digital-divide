@@ -19,13 +19,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usersService } from "@/services";
+import type { User } from "@/types";
 import styles from "./page.module.css";
-
-// Typescript requires types to be defined, so we define a simple User type here
-type User = {
-  id: string;
-  username: string;
-};
 
 export default function TestPage() {
   // we use useState for dynamic data here

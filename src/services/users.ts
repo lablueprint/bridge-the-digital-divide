@@ -1,14 +1,7 @@
 import { supabase } from "./supabase";
+import type { User, NewUser } from "@/types";
 
-type User = {
-  id: string;
-  username: string;
-};
-
-// Omit creates a User object, but without the specified values (id here, as supabase automatically generates the id)
-type NewUser = Omit<User, "id">;
-
-// Example service: add more user operations here as the application grows.
+// Example service
 export const usersService = {
   async getUsers() {
     const { data, error } = await supabase
@@ -29,7 +22,7 @@ export const usersService = {
     return { data: data as User | null, error };
   },
 
-  async addUser(user: NewUser) {
+  async addUser(user: NewUser) { // can directly use newUser type here rather than manually creating an omit object
     const { data, error } = await supabase
       .from("users")
       .insert(user)
